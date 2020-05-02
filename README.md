@@ -32,7 +32,7 @@ yarn prod or npm run prod
 yarn lint or npm run lint
 ```
 
-## Packaging for Production
+## Packaging all for Production
 
 To package apps for the local platform:
 
@@ -40,19 +40,19 @@ To package apps for the local platform:
 yarn package or npm run package
 ```
 
-## Packaging for Production for win
+## Packaging Production for win
 
 ```bash
 yarn package-win or npm run package-win
 ```
 
-## Packaging for Production for mac
+## Packaging Production for mac
 
 ```bash
 yarn package-mac or npm run package-mac
 ```
 
-## Packaging for Production for linux
+## Packaging Production for linux
 
 ```bash
 yarn package-linux or npm run package-linux

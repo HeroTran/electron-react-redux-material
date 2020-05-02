@@ -1,10 +1,13 @@
 # OneOnOne Teacher Desktop
-### https://ourcodeworld.com/articles/read/365/how-to-create-a-windows-installer-for-an-application-built-with-electron-framework
 ## Install
 
 First, clone the repo via git and install dependencies:(Should use yarn)
 Why need use immutablejs
 https://www.newline.co/fullstack-react/articles/using-immutablejs-with-react-and-redux/
+You should use electron-packger for build
+https://ourcodeworld.com/articles/read/365/how-to-create-a-windows-installer-for-an-application-built-with-electron-framework
+set DEBUG_PROD=true for test on production after pack
+
 ```bash
 npm i -g electron
 yarn or npm install 
@@ -22,6 +25,11 @@ yarn dev or npm run dev
 
 ```bash
 yarn prod or npm run prod
+```
+
+## Check Eslint for rule code
+```bash
+yarn lint or npm run lint
 ```
 
 ## Packaging for Production

@@ -7,6 +7,7 @@ import { AppContainer } from 'react-hot-loader';
 import configureStore, { history } from './functionals/store';
 import App from './app';
 import LanguageContainer from './containers/Language/LanguageContainer';
+import './styles/styles.scss';
 
 const { translationMessages } = require('./i18n');
 

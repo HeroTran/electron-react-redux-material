@@ -1,0 +1,18 @@
+/* Resolution Mobiles (Landscape)
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+  body{
+    background-color: brown !important;
+  }
+}
+/* Resolution Mobiles (Portrait)
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+  body{
+    background-color: cyan !important;
+  }
+}

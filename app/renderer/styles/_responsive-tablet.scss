@@ -1,0 +1,18 @@
+/* ##Device = Tablets, Ipads (portrait)
+*/
+
+@media (min-width: 768px) and (max-width: 1023px) {
+
+  body{
+    background-color: blue !important;
+  }
+
+}
+/* ##Device = Tablets, Ipads (landscape)*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+
+  body{
+    background-color: seagreen !important;
+  }
+}

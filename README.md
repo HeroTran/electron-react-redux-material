@@ -1,12 +1,12 @@
-# OneOnOne Teacher Desktop
-## Install
+# Herotran Electron Desktop React Redux
 
-First, clone the repo via git and install dependencies:(Should use yarn)
 Why need use immutablejs
 https://www.newline.co/fullstack-react/articles/using-immutablejs-with-react-and-redux/
 You should use electron-packger for build
 https://ourcodeworld.com/articles/read/365/how-to-create-a-windows-installer-for-an-application-built-with-electron-framework
-set DEBUG_PROD=true for test on production after pack
+set DEBUG_PROD=true for test on production when deploy on store should remove it.
+
+## First, clone the repo via git and install dependencies:(Should use yarn)
 
 ```bash
 npm i -g electron

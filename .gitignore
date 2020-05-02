@@ -9,7 +9,8 @@ dist
 output
 build
 app/dll/*
-app/main/main.prod.js.map
-app/main/main.prod.js
+app/main.prod.js.map
+app/main.prod.js
+app/main.prod.js.LICENSE.txt
 .eslintcache
 release

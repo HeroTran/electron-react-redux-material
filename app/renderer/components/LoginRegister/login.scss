@@ -1,0 +1,25 @@
+.social-button{
+    a{
+        text-align: center;
+        text-decoration: none;
+    }
+}
+
+.page-svg {
+    margin: 50px auto;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+.hung{
+    color: "#f4";
+}
+.bg{
+    background-image: url('../../../public/img/logo.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 80px;
+    height: 80px;
+    margin: 20px auto;
+}

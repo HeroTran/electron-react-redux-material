@@ -1,0 +1,15 @@
+.vscode
+.idea
+package-lock.json
+.DS_STORE
+node_modules
+.module-cache
+*.log*
+dist
+output
+build
+app/dll/*
+app/main/main.prod.js.map
+app/main/main.prod.js
+.eslintcache
+release

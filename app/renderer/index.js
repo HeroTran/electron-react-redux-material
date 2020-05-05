@@ -3,13 +3,12 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { CssBaseline } from '@material-ui/core';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-import { AppContainer } from 'react-hot-loader';
+import { ConnectedRouter } from 'connected-react-router/immutable';
+import { I18nextProvider } from 'react-i18next';
 import configureStore, { history } from './functionals/store';
 import App from './app';
-import LanguageContainer from './containers/Language/LanguageContainer';
+import i18n from './i18n';
 import './styles/styles.scss';
-
-const { translationMessages } = require('./i18n');
 
 const META_API = process.env.REACT_APP_API_URL;
 console.warn(META_API);
@@ -19,63 +18,25 @@ const theme = createMuiTheme({
     useNextVariants: true,
   },
 });
-const render = (messages) => {
+const render = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <LanguageContainer messages={messages}>
-        <MuiThemeProvider theme={theme}>
-          <CssBaseline />
-          <App history={history} />
-        </MuiThemeProvider>
-      </LanguageContainer>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <ConnectedRouter history={history}>
+          <I18nextProvider i18n={i18n}>
+            <App />
+          </I18nextProvider>
+        </ConnectedRouter>
+      </MuiThemeProvider>
     </Provider>,
     document.getElementById('root')
   );
 };
-
-if (module.hot) {
-  module.hot.accept('./app', () => {
-    // eslint-disable-next-line global-require
-    const NextRoot = require('./app');
-    render(
-      <AppContainer>
-        <Provider store={store}>
-          <LanguageContainer messages={translationMessages}>
-            <MuiThemeProvider theme={theme}>
-              <CssBaseline />
-              <NextRoot history={history} />
-            </MuiThemeProvider>
-          </LanguageContainer>
-        </Provider>
-      </AppContainer>,
-      document.getElementById('root')
-    );
-  });
-}
-
+render();
 if (module.hot) {
   module.hot.accept(['./i18n', './components/App/App'], () => {
     ReactDOM.unmountComponentAtNode(document.getElementById('root'));
-    render(translationMessages);
+    render();
   });
-}
-
-if (!window.Intl) {
-  new Promise((resolve) => {
-    resolve(import('intl'));
-  })
-    .then(() =>
-      Promise.all([
-        // eslint-disable-next-line global-require
-        require('intl/locale-data/jsonp/en.js'),
-        // eslint-disable-next-line global-require
-        require('intl/locale-data/jsonp/de.js'),
-      ])
-    )
-    .then(() => render(translationMessages))
-    .catch((err) => {
-      throw err;
-    });
-} else {
-  render(translationMessages);
 }

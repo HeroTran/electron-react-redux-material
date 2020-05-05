@@ -10,9 +10,14 @@ import { rootSaga } from './rootSaga';
 
 const initImmutable = Immutable.Map();
 const initial = {
-  language: {},
   router: {},
+  common: {},
   authUser: {},
+  setting: {},
+  classList: {},
+  openSlot: {},
+  profile: {},
+  virtualClassRoom: {},
 };
 
 const preloadedState = initImmutable.map(Immutable.fromJS(initial));

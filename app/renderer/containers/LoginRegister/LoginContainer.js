@@ -5,6 +5,8 @@ import { makeSelectUserNameState } from '../../functionals/LoginRegister/selecto
 const mapStateToProps = (state) => ({
   userName: makeSelectUserNameState(state),
 });
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  // call function from action
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

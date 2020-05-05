@@ -135,9 +135,8 @@ export default merge.smart(baseConfig, {
      * 'staging', for example, by changing the ENV variables in the npm scripts
      */
     new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development',
+      NODE_ENV: 'development'
     }),
-
     new webpack.LoaderOptionsPlugin({
       debug: true,
     }),
@@ -149,8 +148,9 @@ export default merge.smart(baseConfig, {
     fs: 'empty',
   },
   resolve: {
-    modules: ['src', 'node_modules'],
-    extensions: ['.jsx', '.js', '.scss', '.json', '.css'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom'
+    }
   },
   devServer: {
     port: PORT,

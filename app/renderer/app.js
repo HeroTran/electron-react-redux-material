@@ -1,21 +1,21 @@
 import * as React from 'react';
 import { HashRouter } from 'react-router-dom';
 import { Switch, Route } from 'react-router';
-import { ConnectedRouter } from 'connected-react-router/immutable';
-// import { Authenticated, SpinnerLoading } from './components';
+// import Authenticated from './components';
+import { withTranslation } from 'react-i18next';
 import LoginContainer from './containers/LoginRegister/LoginContainer';
+import ForgotPasswordContainer from './containers/LoginRegister/ForgotPasswordContainer';
 import AppContainer from './containers/App/AppContainer';
 
-function App({ history }) {
+function App() {
   return (
-    <ConnectedRouter history={history}>
-      <HashRouter>
-        <Switch>
-          <Route path="/login" exact component={LoginContainer} />
-          <Route path="/" exact component={AppContainer} />
-        </Switch>
-      </HashRouter>
-    </ConnectedRouter>
+    <HashRouter>
+      <Switch>
+        <Route path="/login" component={LoginContainer} />
+        <Route path="/forgot-password" component={ForgotPasswordContainer} />
+        <Route path="/" component={AppContainer} />
+      </Switch>
+    </HashRouter>
   );
 }
-export default App;
+export default withTranslation()(App);

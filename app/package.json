@@ -1,13 +1,12 @@
 {
-    "name": "herotran210-desktop",
-    "productName": "herotran210",
+    "name": "1on1",
+    "productName": "1on1",
     "version": "0.0.1",
-    "description": "herotran210",
+    "description": "1on1",
     "main": "./main.prod.js",
     "author": {
         "name": "Hero Tran",
-        "email": "herotran210@gmail.com",
-        "url": "https://www.linkedin.com/in/herotran210/"
+        "email": "htran@bocasay.com"
     },
     "scripts": {
       "electron-rebuild": "node -r ../internals/scripts/BabelRegister.js ../internals/scripts/ElectronRebuild.js",

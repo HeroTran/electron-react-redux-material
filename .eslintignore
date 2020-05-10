@@ -46,6 +46,8 @@ app/dist/renderer.prod.js
 app/dist/renderer.prod.js.map
 app/dist/style.css
 app/dist/style.css.map
+app/renderer/translations/en.json
+app/renderer/translations/vn.json
 dist
 dll
 internals

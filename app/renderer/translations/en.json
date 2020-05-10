@@ -30,80 +30,11 @@
     "password": "Password",
     "rememberMe": "Remember me",
     "forgotPassword": "Forgot password?",
-    "signIn": "Sign in",
-    "english": "English",
-    "1on1": "1 on 1",
-    "atHome": "for kids at home"
-  },
-  "classroom": {
-    "waitingSlider": "Waiting members join room",
-    "cameraParent": "Box camera parent",
-    "cameraTeacher": "Box camera teacher",
-    "closedClassroom": "Oops, Classroom is closed.",
-    "pleaseAllowRtc": "Please allow access microphone or camera.",
-    "reload": "Reload page",
-    "lessonComplete": "Lesson Completed",
-    "seeYou": "See you next time !",
-    "checkStatusRtc": "Checking status your devices on classroom",
-    "deviceName": "Device name",
-    "statusDevice": "Status",
-    "microphone": "Microphone",
-    "browser": "Browser",
-    "cameraAccess": "Camera Access",
-    "webSocket": "Web Socket",
-    "close": "Close",
-    "saveChange": "Save change",
-    "microphoneValidate": "Please install an external microphone device.",
-    "browserValidate": "Chrome or Firefox is the best support of 1on1 Classroom",
-    "cameraAccessValidate": "Your device is no camera",
-    "webSocketValidate": "Web Socket is blocked.",
-    "switchDevice": "Switch preferred camera and microphone",
-    "selectCamera": "Select camera",
-    "selectMicrophone": "Select microphone",
-    "adminInClass": "Admin in classroom",
-    "playVideo": "Video",
-    "playVideoNotification": "Only watch. \n Teacher controlling this video."
+    "signIn": "Sign in"
   },
   "userSettings": {
     "settings":"Settings",
     "signOut": "Sign Out"
-  },
-  "profile":{
-    "occupation": "Occupation",
-    "notesForUs": "Do you have any notes for us ?",
-    "saveProfile": "Save your profile"
-  },
-  "classList":{
-    "learnerName": "Learner Name",
-    "classTime": "Class Time",
-    "teacher": "Teacher",
-    "lessonName": "Lesson Name",
-    "references": "References",
-    "feedback":"Feedback",
-    "inactive": "Inactive",
-    "done": "Done",
-    "enterClass" : "Enter Class",
-    "allClass" : "All Class",
-    "upcomingClass": "Upcoming Class",
-    "history": "History",
-    "dateTime": "Date Time",
-    "selectDate": "Select Date",
-    "lessonStatus": "Lesson Status",
-    "action": "Action",
-    "classID": "Class ID"
-  },
-  "header":{
-    "home": "Home",
-    "classList": "Class List",
-    "openSlot": "Open Slot",
-    "feedback": "Feedback",
-    "help": "Help"
-  },
-  "changePassword":{
-    "currentPassword": "Current Password",
-    "newPassword": "New Password",
-    "confirmPassword": "Confirm Password",
-    "changePassword": "Change Password"
   },
   "validation":{
     "yourPassIncorrect": "Your Password Is Incorrect",

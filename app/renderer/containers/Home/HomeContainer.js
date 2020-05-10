@@ -6,6 +6,5 @@ const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({});
 
-const HomeWithI18n = withTranslation('translation')(Home);
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeWithI18n);
+const HomeInil = withTranslation('translation')(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeInil);

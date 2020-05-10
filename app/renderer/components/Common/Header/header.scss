@@ -1,0 +1,194 @@
+.wrapper-header{
+  display: block;
+  width: 100%;
+  background-color: #ffffff;
+  text-align: center;
+  box-shadow: 0 2px 16px 0 rgba(235, 231, 231, 0.5);
+  -webkit-box-shadow: 0 2px 16px 0 rgba(235, 231, 231, 0.5);
+  ul{
+    list-style: none;
+  }
+  .group-menu{
+    position: relative;
+    display: inline-block;
+    margin: 0px auto;
+    ul{
+      li{
+        display: inline-block;
+        margin: 0px 25px;
+        text-align: center;
+        a{
+          text-decoration: none;
+          span{
+            font-family: 'Montserrat-SemiBold', Arial, Helvetica, sans-serif;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            display: block;
+            color: #011a2e;
+            &:hover{
+              color: #0070cf;
+            }
+          }
+        }
+        i{
+          display: block;
+          background-size: contain;
+          background-repeat: no-repeat;
+          margin: 2px auto;
+          padding: 0px;
+          text-align: center;
+          &.icon-home{
+            width: 20px;
+            height: 20px;
+            background-image: url('../../../../public/img/home_icon.png');
+          }
+          &.icon-classlist{
+            width: 20px;
+            height: 20px;
+            background-image: url('../../../../public/img/list_icon.png');
+          }
+          &.icon-openslot{
+            width: 20px;
+            height: 20px;
+            background-image: url('../../../../public/img/calendar-icon.png');
+          }
+        }
+      }
+    }
+  }
+  .group-user{
+    position: relative;
+    float: right;
+    right: 40px;
+    top: 10px;
+    .info-user{
+      display: inline-block;
+      cursor: pointer;
+      img{
+        display: inline-block;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        padding: 0px;
+        vertical-align: middle;
+        margin-right: 6px;
+      }
+      p{
+        display: inline-block;
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #011a2e;
+        vertical-align: middle;
+        max-width: 180px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+  }
+  i.user-arrow{
+      display: inline-block;
+      background-size: contain;
+      background-repeat: no-repeat;
+      padding: 0px;
+      text-align: center;
+      width: 12px;
+      height: 12px;
+      background-image: url('../../../../public/img/dropdown-icon.png');
+      vertical-align: middle;
+      position: relative;
+      left: 5px;
+      cursor: pointer;
+    }
+  }
+}
+
+.user-setting{
+  position: absolute;
+  top: 55px;
+  left: 0px;
+  width: 100%;
+  z-index: 999;
+  ul{
+    border-radius: 6px;
+    box-shadow: 0 8px 24px 0 #e5e9eb;
+    border: solid 1px #e8e8e8;
+    background-color: #ffffff;
+    margin: 0px;
+    padding: 0px;
+    li{
+      display: block;
+      border-bottom: 1px solid #e8e8e8;
+      text-align: left;
+      padding: 4px 5px;
+      cursor: pointer;
+      font-size: 12px;
+      &:last-child{
+        border-bottom: 0px;
+      }
+    }
+    p{
+      display: inline-block;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #00192f;
+      vertical-align: middle;
+      max-width: 140px;
+      word-break: break-word;
+    }
+    i{
+      display: inline-block;
+      background-size: contain;
+      background-repeat: no-repeat;
+      padding: 0px;
+      position: relative;
+      cursor: pointer;
+      vertical-align: middle;
+      margin-right: 16px;
+      margin-left: 10px;
+      text-align: left;
+    }
+    .each-info{
+      img{
+        display: inline-block;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        padding: 0px;
+        vertical-align: middle;
+        margin-right: 10px;
+      }
+    }
+    .each-setting{
+      i{
+        width: 12px;
+        height: 12px;
+        background-image: url('../../../../public/img/setting-icon.png');
+      }
+    }
+    .each-signout{
+      i{
+        width: 13px;
+        height: 10px;
+        background-image: url('../../../../public/img/signout_icon.png');
+      }
+    }
+  }
+}
+
+.show-menu{
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+}
+.hide-menu{
+  display: none;
+}

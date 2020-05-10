@@ -27,7 +27,7 @@ export default merge.smart(baseConfig, {
 
   output: {
     path: path.join(PATHS.app, 'dist'),
-    publicPath: `${PATHS.app}/dist`,
+    publicPath: `${PATHS.app}/dist/`,
     filename: 'renderer.prod.js',
   },
   resolve: {
@@ -61,49 +61,45 @@ export default merge.smart(baseConfig, {
         use: {
           loader: 'url-loader',
           options: {
-            limit: 10000,
             mimetype: 'application/font-woff',
-          },
-        },
+          }
+        }
       },
       {
         test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
         use: {
           loader: 'url-loader',
           options: {
-            limit: 10000,
-            mimetype: 'application/font-woff',
-          },
-        },
+            mimetype: 'application/font-woff'
+          }
+        }
       },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
         use: {
           loader: 'url-loader',
           options: {
-            limit: 10000,
-            mimetype: 'application/octet-stream',
-          },
-        },
+            mimetype: 'application/octet-stream'
+          }
+        }
       },
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        use: 'file-loader',
+        use: 'file-loader'
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         use: {
           loader: 'url-loader',
           options: {
-            limit: 10000,
-            mimetype: 'image/svg+xml',
-          },
-        },
+            mimetype: 'image/svg+xml'
+          }
+        }
       },
       {
         test: /\.(?:ico|gif|png|jpg|jpeg|webp)$/,
-        use: 'url-loader',
-      },
+        use: 'url-loader'
+      }
     ],
   },
 

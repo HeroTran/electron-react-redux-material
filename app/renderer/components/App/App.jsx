@@ -1,42 +1,68 @@
-import * as React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useMemo } from 'react';
 import Routes from '../Common/Routes/Routes';
+import Header from '../Common/Header/Header';
+import { ROUTE_PAGE } from '../../functionals/Common/constants';
+import { isCheckMathLocation, createActiveTabMenu } from '../../utils/helper';
+
 import './app.scss';
 
-class App extends React.Component {
-  render() {
+const App = (props) => {
+  const {
+    isLoading,
+    isAuthentication401,
+    history,
+    location,
+    handleSignOut,
+  } = props;
+  const [showMenu, setShowMenu] = useState(true);
+  const [activeMenu, setActiveMenu] = useState(ROUTE_PAGE.ROUTE_HOME);
+
+  useEffect(() => {
+    const isShowHeader = isCheckMathLocation(
+      location.pathname,
+      ROUTE_PAGE.ROUTE_CLASSROOM
+    );
+    setShowMenu(!isShowHeader);
+    if (!isShowHeader) {
+      const activeMenu = createActiveTabMenu(location.pathname);
+      setActiveMenu(activeMenu);
+    }
+  }, [location.pathname]);
+  useEffect(() => {
+    if (isAuthentication401) {
+      handleSignOut();
+      history.push(ROUTE_PAGE.ROUTE_LOGIN);
+    }
+  }, [isAuthentication401]);
+
+  const createHeaderElement = useMemo(() => {
     return (
-      <>
-        <div className="page-wrapper">
-          <div className="page-container">
-            <div className="main-content">
-              <div className="section__content section__content--p30">
-                <button type="button" onClick={this.props.history.goBack}>
-                  Back
-                </button>
-                <div className="container-fluid">
-                  <Link to="/login">Login</Link>
-                  <Link to="/forgot-password">forgot-password</Link>
-                  <p>All page inside app</p>
-                  <Link to="/">Home</Link>
-                  <Link to="/open-slot">open-Slot</Link>
-                  <Link to="/profile">profile</Link>
-                  <Link to="/setting">setting</Link>
-                  <Link to="/classroom/a564c148-e480-4f92-aa7a-6cd9b7b19ae6">
-                    VC classroom
-                  </Link>
-                  <Link to="/dasdsa">404</Link>
-                  <>
-                    <Routes />
-                  </>
-                </div>
-              </div>
+      <Header
+        history={history}
+        activeMenu={activeMenu}
+        handleSignOut={handleSignOut}
+      />
+    );
+  }, [activeMenu]);
+  return (
+    <>
+      <div className={`page-wrapper ${!showMenu ? `full-screen` : ''}`}>
+        {showMenu && (
+          <div className="header-container">{createHeaderElement}</div>
+        )}
+        <div className="main-container">
+          {isLoading && (
+            <div className="wrapper-loading">
+              <div className="loading loading-page" />
             </div>
+          )}
+          <div className="wrapper-page scrollbar">
+            <Routes />
           </div>
         </div>
-      </>
-    );
-  }
-}
+      </div>
+    </>
+  );
+};
 
 export default App;

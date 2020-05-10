@@ -1,9 +1,11 @@
 import i18n from 'i18next';
+import Backend from 'i18next-http-backend';
+import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
-
 import translationEN from './translations/en.json';
-import translationvn from './translations/vn.json';
+import translationVn from './translations/vn.json';
 
+window.localStorage.setItem('language', 'en');
 const lang = localStorage.getItem('language') || 'en';
 
 const resources = {
@@ -11,18 +13,21 @@ const resources = {
     translation: translationEN,
   },
   vn: {
-    translation: translationvn,
+    translation: translationVn,
   },
 };
 
 i18n
+  .use(Backend)
+  .use(LanguageDetector)
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     resources,
     lng: lang,
-
+    debug: true,
     interpolation: {
-      escapeValue: false, // react already safes from xss
+      escapeValue: false, // not needed for react!!
+      formatSeparator: '.',
     },
   });
 

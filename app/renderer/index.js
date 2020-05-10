@@ -10,9 +10,7 @@ import App from './app';
 import i18n from './i18n';
 import './styles/styles.scss';
 
-const META_API = process.env.REACT_APP_API_URL;
-console.warn(META_API);
-const store = configureStore();
+export const store = configureStore();
 const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
@@ -30,7 +28,7 @@ const render = () => {
         </ConnectedRouter>
       </MuiThemeProvider>
     </Provider>,
-    document.getElementById('root')
+    document.getElementById('root') || document.createElement('div') // for testing purposes
   );
 };
 render();

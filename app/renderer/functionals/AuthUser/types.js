@@ -1,0 +1,15 @@
+export const currentUser = {
+  avatar_url: '',
+  dob: '',
+  email: '',
+  fullname: '',
+  gender: 0,
+  id: 0,
+  role: '',
+  teacher_code: '',
+  teacher_id: 0,
+  timezone: '',
+  token: '',
+  user_type: 0,
+  username: '',
+};

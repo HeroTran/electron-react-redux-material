@@ -1,14 +1,16 @@
 import axios from 'axios';
-import { getAuthorizationHeader } from './helper';
+import { authentication401 } from '../functionals/Common/actions';
+import { getAuthorizationHeader } from './localStoreHelper';
+import { store } from '../index';
 
-const META_API = process.env.REACT_APP_API_URL;
+const API_URL_HOST = process.env.API_HOST;
 
 const { CancelToken } = axios;
 let source = CancelToken.source();
 
 export function apiGet(request, progressCb) {
   const req = {
-    url: META_API + request.url,
+    url: API_URL_HOST + request.url,
     method: 'GET',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
@@ -23,15 +25,15 @@ export function apiGet(request, progressCb) {
       return Promise.resolve(res);
     })
     .catch((err) => {
-      return Promise.reject(err);
+      return handleErrorUnauthorized(err);
     });
 }
 
-export function post(request, cancelToken) {
+export function apiPost(request, cancelToken) {
   let req;
   if (cancelToken) {
     req = {
-      url: META_API + request.url,
+      url: API_URL_HOST + request.url,
       method: 'POST',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
@@ -44,7 +46,7 @@ export function post(request, cancelToken) {
     };
   } else {
     req = {
-      url: META_API + request.url,
+      url: API_URL_HOST + request.url,
       method: 'POST',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
@@ -61,13 +63,13 @@ export function post(request, cancelToken) {
       return Promise.resolve(res);
     })
     .catch((err) => {
-      return Promise.reject(err);
+      return handleErrorUnauthorized(err);
     });
 }
 
 export function postUploadFile(request, progressCb) {
   const req = {
-    url: META_API + request.url + request.uuid,
+    url: API_URL_HOST + request.url + request.uuid,
     data: request.data,
     method: 'POST',
     headers: {
@@ -84,13 +86,13 @@ export function postUploadFile(request, progressCb) {
       return Promise.resolve(res);
     })
     .catch((err) => {
-      return Promise.reject(err);
+      return handleErrorUnauthorized(err);
     });
 }
 
 export function apiPut(request) {
   const req = {
-    url: META_API + request.url,
+    url: API_URL_HOST + request.url,
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
@@ -106,13 +108,13 @@ export function apiPut(request) {
       return Promise.resolve(res);
     })
     .catch((err) => {
-      return Promise.reject(err);
+      return handleErrorUnauthorized(err);
     });
 }
 
 export function apiPatch(request) {
   const req = {
-    url: META_API + request.url,
+    url: API_URL_HOST + request.url,
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
@@ -127,13 +129,13 @@ export function apiPatch(request) {
       return Promise.resolve(res);
     })
     .catch((err) => {
-      return Promise.reject(err);
+      return handleErrorUnauthorized(err);
     });
 }
 
 export function apiDelete(request) {
   const req = {
-    url: META_API + request.url,
+    url: API_URL_HOST + request.url,
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
@@ -148,7 +150,7 @@ export function apiDelete(request) {
       return Promise.resolve(res);
     })
     .catch((err) => {
-      return Promise.reject(err);
+      return handleErrorUnauthorized(err);
     });
 }
 
@@ -157,9 +159,9 @@ export function cancelUploadFile() {
   source = CancelToken.source();
 }
 
-export function login(request) {
+export function apiLogin(request) {
   const req = {
-    url: META_API + request.url,
+    url: API_URL_HOST + request.url,
     method: 'POST',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
@@ -172,27 +174,46 @@ export function login(request) {
     .then((res) => {
       return Promise.resolve(res);
     })
-    .catch((err) => {
-      return Promise.reject(err);
+    .catch((error) => {
+      return Promise.reject(error.response || error);
     });
 }
 
-export function logout(url) {
-  const req = {
-    url: META_API + url,
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
-      Authorization: getAuthorizationHeader(),
-    },
-    responseType: 'json',
-  };
-  const postData = axios(req);
-  return postData
-    .then((res) => {
-      return Promise.resolve(res);
-    })
-    .catch((err) => {
-      return Promise.reject(err);
-    });
+const URL_TIME_ZONE = process.env.TIME_ZONE_URL;
+const KEY_TIME_ZONE = process.env.TIME_ZONE_KEY;
+
+export async function getTimezone(userZone) {
+  try {
+    const params = {
+      key: KEY_TIME_ZONE,
+      format: 'json',
+      zone: userZone,
+    };
+    const getData = await axios.get(URL_TIME_ZONE, { params });
+    return getData.data.zones[0];
+  } catch (error) {
+    return Promise.reject(error.response || error);
+  }
+}
+
+export async function getListTimezone() {
+  try {
+    const params = {
+      key: KEY_TIME_ZONE,
+      format: 'json',
+    };
+    const getData = await axios.get(URL_TIME_ZONE, { params });
+    return getData;
+  } catch (error) {
+    return Promise.reject(error.response || error);
+  }
+}
+
+function handleErrorUnauthorized(error) {
+  const { status } = error.response;
+  if (status === 401) {
+    store.dispatch(authentication401(true));
+    return;
+  }
+  return Promise.reject(error.response || error);
 }

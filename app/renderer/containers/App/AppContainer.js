@@ -1,11 +1,24 @@
 import { connect } from 'react-redux';
-import { withTranslation } from 'react-i18next';
 import App from '../../components/App/App';
+import {
+  makeSelectIsLoading,
+  makeSelectIsAuthentication,
+} from '../../functionals/Common/selectors';
+import { logoutRequest } from '../../functionals/AuthUser/actions';
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => {
+  return {
+    isLoading: makeSelectIsLoading(state),
+    isAuthentication401: makeSelectIsAuthentication(state),
+  };
+};
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleSignOut: () => {
+      dispatch(logoutRequest());
+    },
+  };
+};
 
-const AppWithI18n = withTranslation('translation')(App);
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppWithI18n);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -12,6 +12,7 @@ module.exports = {
   extends: ['airbnb', 'plugin:prettier/recommended', 'prettier/react'],
   rules: {
     "import/no-named-as-default": 0,
+    "import/no-cycle":"off",
     "import/no-extraneous-dependencies": "off",
     'arrow-parens': 'off',
     'compat/compat': 'off',
@@ -53,6 +54,7 @@ module.exports = {
       }
     ],
     "react/destructuring-assignment": "off",
+    "react/forbid-prop-types": 'off', 
     'react/jsx-no-bind': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
     "react/jsx-props-no-spreading": "off",

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux-immutable';
 import { connectRouter } from 'connected-react-router/immutable';
 import { commonReducer } from './Common';
-import { authUser } from './LoginRegister';
+import { authReducer } from './AuthUser';
 import { setting } from './Setting';
 import { classList } from './ClassList';
 import { openSlot } from './OpenSlot';
@@ -12,7 +12,7 @@ export const rootReducer = (history) =>
   combineReducers({
     router: connectRouter(history),
     common: commonReducer,
-    authUser,
+    authReducer,
     setting,
     classList,
     openSlot,

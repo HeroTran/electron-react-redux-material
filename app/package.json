@@ -1,8 +1,8 @@
 {
-    "name": "1on1",
-    "productName": "1on1",
+    "name": "herotran210_desktop_app",
+    "productName": "herotran210_desktop_app",
     "version": "0.0.1",
-    "description": "1on1",
+    "description": "herotran210_desktop_app",
     "main": "./main.prod.js",
     "author": {
         "name": "Hero Tran",

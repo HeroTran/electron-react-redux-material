@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should be rendered without error matches snapshot 1`] = `
+<div
+  className="wrapper-login"
+>
+  <div
+    className="MuiGrid-container-1"
+  >
+    <div
+      className="MuiGrid-item-2 MuiGrid-grid-xs-12-41 MuiGrid-grid-sm-6-49"
+    >
+      <div
+        className="form-background"
+      >
+        <div
+          className="bg-login"
+        />
+      </div>
+    </div>
+    <div
+      className="MuiGrid-item-2 MuiGrid-grid-xs-12-41 MuiGrid-grid-sm-6-49"
+    >
+      <div
+        className="form-login"
+      >
+        <div
+          className="main-login"
+        >
+          <div
+            className="logo-login"
+          />
+          <form
+            onSubmit={[Function]}
+          >
+            <div
+              className="group-form"
+            >
+              <div
+                className="each-form"
+              >
+                <input
+                  className="form-control input-form"
+                  name="email"
+                  placeholder="Email"
+                />
+                <i
+                  className="icon icon-email"
+                />
+              </div>
+              <div
+                className="each-form"
+              >
+                <input
+                  className="form-control input-form"
+                  name="password"
+                  placeholder="Password"
+                  type="password"
+                />
+                <i
+                  className="icon icon-password"
+                />
+                <i
+                  className="icon icon-eye-open"
+                  onClick={[Function]}
+                />
+              </div>
+              <div
+                className="each-form each-form-center"
+              >
+                <a
+                  className="link"
+                  onClick={[Function]}
+                >
+                  Forgot password?
+                </a>
+              </div>
+              <div
+                className="each-form each-form-center"
+              >
+                <button
+                  className="btn btn-primary"
+                  name="signin"
+                  type="submit"
+                >
+                  Sign in
+                  
+                </button>
+              </div>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

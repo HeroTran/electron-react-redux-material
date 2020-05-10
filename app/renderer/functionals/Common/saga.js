@@ -10,7 +10,9 @@ function* setLoadingDisable() {
   yield put(loadingDisable());
 }
 
-export const commonSaga = all([
-  takeLatest(actiontypes.IS_LOADING_ENABLE, setLoadingEnable),
-  takeLatest(actiontypes.IS_LOADING_DISABLE, setLoadingDisable),
-]);
+export default function* root() {
+  yield all([
+    takeLatest(actiontypes.IS_LOADING_ENABLE_REQUEST, setLoadingEnable),
+    takeLatest(actiontypes.IS_LOADING_DISABLE_REQUEST, setLoadingDisable),
+  ]);
+}

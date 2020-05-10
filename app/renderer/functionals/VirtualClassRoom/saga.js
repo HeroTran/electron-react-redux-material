@@ -1,3 +1,5 @@
 import { all } from 'redux-saga/effects';
 
-export const virtualClassRoomSaga = all([]);
+export default function* root() {
+  yield all([]);
+}

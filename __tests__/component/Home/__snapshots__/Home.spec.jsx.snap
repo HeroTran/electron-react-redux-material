@@ -1,3 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should be rendered without error rendering root component 1`] = `ShallowWrapper {}`;
+exports[`should be rendered without error matches snapshot 1`] = `
+<div
+  className="main-home"
+>
+  <h1>
+    Home
+  </h1>
+</div>
+`;

@@ -1,21 +1,17 @@
 import * as React from 'react';
-import { HashRouter } from 'react-router-dom';
-import { Switch, Route } from 'react-router';
-// import Authenticated from './components';
-import { withTranslation } from 'react-i18next';
-import LoginContainer from './containers/LoginRegister/LoginContainer';
-import ForgotPasswordContainer from './containers/LoginRegister/ForgotPasswordContainer';
-import AppContainer from './containers/App/AppContainer';
+import { HashRouter, Switch, Route } from 'react-router-dom';
+import PrivateRoute from './components/Common/PrivateRoute/PrivateRoute';
+import { LoginContainer, AppContainer } from './containers';
+import { ROUTE_PAGE } from './functionals/Common/constants';
 
-function App() {
+const App = () => {
   return (
     <HashRouter>
       <Switch>
-        <Route path="/login" component={LoginContainer} />
-        <Route path="/forgot-password" component={ForgotPasswordContainer} />
-        <Route path="/" component={AppContainer} />
+        <Route path={ROUTE_PAGE.ROUTE_LOGIN} component={LoginContainer} />
+        <PrivateRoute path={ROUTE_PAGE.ROUTE_HOME} component={AppContainer} />
       </Switch>
     </HashRouter>
   );
-}
-export default withTranslation()(App);
+};
+export default App;

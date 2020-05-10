@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './virtualClassRoom.scss';
 
 const VirtualClassRoom = (props) => {
@@ -8,12 +8,10 @@ const VirtualClassRoom = (props) => {
   const { id } = props.match.params;
   return (
     <div>
-      <button type="button" onClick={props.history.goBack}>
-        Love
-      </button>
+      <Link to="/">Back Home</Link>
       <h1>VirtualClassRoom Page has id: {id}</h1>
     </div>
   );
 };
 
-export default withRouter(VirtualClassRoom);
+export default VirtualClassRoom;

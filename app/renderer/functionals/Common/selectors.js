@@ -6,3 +6,8 @@ export const getCommonState = (state) => {
 export const makeSelectIsLoading = createSelector(getCommonState, (common) =>
   common.get('isLoading')
 );
+
+export const makeSelectIsAuthentication = createSelector(
+  getCommonState,
+  (common) => common.get('isAuthentication401')
+);

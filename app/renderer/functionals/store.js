@@ -4,7 +4,7 @@ import { routerMiddleware } from 'connected-react-router/immutable';
 import { createBrowserHistory } from 'history';
 import createSagaMiddleware from 'redux-saga';
 import * as Immutable from 'immutable';
-import { logger } from '../middleware';
+// import { logger } from '../middleware';
 import { rootReducer } from './rootReducer';
 import { rootSaga } from './rootSaga';
 
@@ -41,11 +41,7 @@ export const history = createBrowserHistory();
 
 export default function configureStore() {
   const sagaMiddleware = createSagaMiddleware();
-  let middleware = applyMiddleware(
-    sagaMiddleware,
-    logger,
-    routerMiddleware(history)
-  );
+  let middleware = applyMiddleware(sagaMiddleware, routerMiddleware(history));
   if (process.env.NODE_ENV !== 'production') {
     const composeEnhancers = composeWithDevTools({
       actionSanitizer,

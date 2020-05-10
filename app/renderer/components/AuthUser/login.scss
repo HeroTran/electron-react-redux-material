@@ -1,0 +1,114 @@
+.wrapper-login{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+
+.form-background{
+    width: 100%;
+    background-color: #00c0d7;
+    height: 100vh;
+    position: relative;
+    .bg-login{
+        background-color: green;
+        width: 400px;
+        height: 367px;
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin: 0px auto;
+        padding: 0px;
+        position:absolute;
+        top: 50%;
+        left: 50%;
+        transform:translate(-50%, -50%);
+    }
+}
+
+.form-login{
+    width: 100%;
+    background-color: #ffffff;
+    height: 100vh;
+    position: relative;
+    .main-login{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        padding: 20px 30px;
+        .logo-login{
+            width: 100px;
+            height: 80px;
+            background-position: center center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin: 15px auto;
+            padding: 0px;
+        }
+        .group-form{
+            display: block;
+            width: 100%;
+            overflow: hidden;
+            .each-form{
+                position: relative;
+                &.each-form-center{
+                    text-align: center;
+                }
+                margin: 20px auto;
+                a.link{
+                    margin: 10px auto;
+                }
+            }
+            .input-form{
+                text-indent: 20px;
+            }
+            .icon{
+                background-size: contain;
+                background-repeat: no-repeat;
+                display: inline-block;
+                margin: 0px;
+                padding: 0px;
+                position: absolute;
+                
+                &.icon-email{
+                    width: 12px;
+                    height: 9px;
+                    left: 10px;
+                    background-image: url('../../../public//img/mail_icon.png');
+                    top: 15px;
+                }
+                &.icon-password{
+                    width: 10px;
+                    height: 13px;
+                    left: 10px;
+                    top: 12px;
+                    background-image: url('../../../public//img/lock_icon.png');
+                }
+                &.icon-eye-open{
+                    width: 12px;
+                    height: 8px;
+                    top: 15px;
+                    right: 10px;
+                    background-image: url('../../../public//img/eye_icon.png');
+                }
+                &.icon-eye-close{
+                    width: 12px;
+                    height: 8px;
+                    top: 15px;
+                    right: 10px;
+                    background-image: url('../../../public//img/eye_close-icon.png');
+                }
+            }
+        }
+    }
+}
+.form-error{
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 15px 0px;
+}
+.btn-login{
+    text-indent: 20px;
+}

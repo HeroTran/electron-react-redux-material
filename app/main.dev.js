@@ -54,21 +54,24 @@ const createWindow = async () => {
           },
   });
   mainWindow.loadURL(`file://${__dirname}/renderer/app.html`);
-
-  // @TODO: Use 'ready-to-show' event
-  //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
-  mainWindow.webContents.on('did-finish-load', () => {
-    if (!mainWindow) {
-      throw new Error('"mainWindow" is not defined');
-    }
-    if (process.env.START_MINIMIZED) {
-      mainWindow.minimize();
-    } else {
-      mainWindow.show();
-      mainWindow.focus();
-    }
-  });
-
+  // mainWindow.maximize() full screen;
+  if (isDev || isDebugProd) {
+    mainWindow.show();
+    mainWindow.focus();
+  }else{
+    mainWindow.webContents.on('did-finish-load', () => {
+      if (!mainWindow) {
+        throw new Error('"mainWindow" is not defined');
+      }
+      if (process.env.START_MINIMIZED) {
+        mainWindow.minimize();
+      } else {
+        mainWindow.show();
+        mainWindow.focus();
+      }
+    });
+  }
+  
   mainWindow.on('closed', () => {
     mainWindow = null;
   });

@@ -5,6 +5,7 @@ https://www.newline.co/fullstack-react/articles/using-immutablejs-with-react-and
 You should use electron-packger for build
 https://ourcodeworld.com/articles/read/365/how-to-create-a-windows-installer-for-an-application-built-with-electron-framework
 set DEBUG_PROD=true for test on production when deploy on store should remove it.
+install electron for mac : npm install -g electron --unsafe-perm=true --allow-root
 
 ## First, clone the repo via git and install dependencies:(Should use yarn)
 

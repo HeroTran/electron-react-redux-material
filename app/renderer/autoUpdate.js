@@ -20,7 +20,8 @@ ipcRenderer.on('app_version', (event, arg) => {
 
 ipcRenderer.on('download-progress', (event, text) => {
   progressBar.style.width = `${text}%`;
-  if (text === 100) {
-    ipcRenderer.send('restart_app');
-  }
+});
+
+ipcRenderer.on('update-downloaded', () => {
+  ipcRenderer.send('restart_app');
 });

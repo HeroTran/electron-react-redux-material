@@ -29,11 +29,11 @@
         "clean": "node rimraf",
         "test": "jest  --coverage --coverageDirectory=output/coverage/jest",
         "test:watch": "npm test -- --watch",
-        "deploy-win": "yarn build && electron-builder build --win --publish always"
+        "deploy-win": "GH_TOKEN=9520551d2e7e330f6658c701f82a87b6336f2855 yarn build && electron-builder build --win --publish always"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/HeroTran/electron-react-redux-material"
+        "url": "https://github.com/HeroTran/electron-react-redux-material.git"
       },
     "build": {
         "appId": "com.electron.herotran210Desktop",

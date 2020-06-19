@@ -1,9 +1,17 @@
 import path from 'path';
-const { app, BrowserWindow, ipcMain } = require('electron');
-const { autoUpdater } = require('electron-updater');
+import { app, BrowserWindow, ipcMain } from 'electron';
+import { autoUpdater } from 'electron-updater';
 // import log from 'electron-log';
 import { PATHS } from './renderer/utils/paths';
 import MenuBuilder from './menu';
+
+export default class AppUpdater {
+  constructor() {
+    log.transports.file.level = 'info';
+    autoUpdater.logger = log;
+    autoUpdater.checkForUpdatesAndNotify();
+  }
+}
 
 let mainWindow = null;
 const isDev = process.env.NODE_ENV === 'development';
@@ -51,7 +59,6 @@ const createWindow = async () => {
     mainWindow.once('ready-to-show', () => {
       mainWindow.show();
       mainWindow.focus();
-      autoUpdater.checkForUpdatesAndNotify();
     });
   }
   
@@ -61,6 +68,7 @@ const createWindow = async () => {
 
   const menuBuilder = new MenuBuilder(mainWindow);
   menuBuilder.buildMenu();
+  new AppUpdater();
 };
 
 /**

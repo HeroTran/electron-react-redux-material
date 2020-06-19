@@ -29,7 +29,7 @@
         "clean": "node rimraf",
         "test": "jest  --coverage --coverageDirectory=output/coverage/jest",
         "test:watch": "npm test -- --watch",
-        "deploy-win": "yarn build && build --win --x64 --publish always"
+        "deploy-win": "yarn build && electron-builder build --win --x64 --publish always"
     },
     "repository": {
         "type": "git",

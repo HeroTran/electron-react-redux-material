@@ -7,28 +7,71 @@
     <meta name="keywords" content="herotran210_desktop_app">
     <meta name="author" content="herotran210_desktop_app">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="icon" type="image/png" sizes="32x32" href="../../resources/favicon.ico" />
     <link rel="icon" type="image/png" sizes="16x16" href="../../resources/favicon.ico" />
     <link rel="shortcut icon"  href="../../resources/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="../dist/style.css">
+    <style>
+      #notification {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        min-width: 500px;
+        min-height: 300px;
+        padding: 20px;
+        border-radius: 5px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      }
+      .hidden {
+        display: none;
+      }
+      #message{
+        color: #2196F3;
+        font-size: 13px;
+        margin: 10px auto;
+        padding: 0px;
+      }
+      h1{
+        font-size: 20px;
+        margin: 10px 0px;
+        color: red;
+      }
+      .main-progress{
+        color: #000!important;
+        background-color: #e8e8e8!important;
+        height: 15px;
+        border-radius: 6px;
+        margin: 30px auto;
+      }
+      #progressBar{
+        color: #fff!important;
+        background-color: #2196F3!important;
+        border-radius: 6px;
+        height: 15px;
+        transition: 0.3s all;
+      }
+      .button-noti{
+        margin: 20px auto;
+      }
+      #close-button{
+        margin-right: 15px;
+      }
+    </style>
   </head>
   <body>
-    <div class="w3-container">
-
-      <h1 style="color:blueviolet">Pingo App - New</h1>
-      <h3>Brand new app</h3>
-  
-      <p>
-        Current version: <span id="version"></span>
-      </p>
-  
-      <div id="messages" style="color:cyan"></div>
-  
-      <div class="w3-light-grey">
-        <div class="w3-blue" style="height:24px;width:0%" id="progressBar"></div>
-      </div>
-  
+    <div id="notification" class="hidden">
+      <h1>This app has <span id="version"></span></h1>
+      <p id="message"></p>
+      <div class="main-progress"><div style="width:0%" id="progressBar"></div></div>
+      <button id="close-button" class="button-noti">
+        Close
+      </button>
+      <button id="restart-button" class="button-noti" class="hidden">
+        Restart
+      </button>
     </div>
     <script src="./autoUpdate.js"></script>
     <div id="root"></div>

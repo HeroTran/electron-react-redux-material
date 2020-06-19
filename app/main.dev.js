@@ -108,27 +108,20 @@ ipcMain.on('restart_app', () => {
   autoUpdater.quitAndInstall();
 });
 
-const dispatch = (data) => {
-  console.log('mainWindow', data);
-  mainWindow.webContents.send('message', data)
-}
-
 autoUpdater.on('checking-for-update', () => {
-  dispatch('Checking for update...')
+  mainWindow.webContents.send('checking-for-update');
 })
 
 autoUpdater.on('update-available', (info) => {
-  dispatch('Update available.')
+  mainWindow.webContents.send('update-available');
 })
 
 autoUpdater.on('update-not-available', (info) => {
-  console.log('update-not-available',info);
-  log.info('Checking update', info)
-  dispatch('Update not available.')
+  mainWindow.webContents.send('update-not-available');
 })
 
-autoUpdater.on('error', (err) => {
-  dispatch('Error in auto-updater. ' + err)
+autoUpdater.on('error-update', (err) => {
+  mainWindow.webContents.send('error-update');
 })
 
 autoUpdater.on('download-progress', (progressObj) => {
@@ -136,5 +129,5 @@ autoUpdater.on('download-progress', (progressObj) => {
 })
 
 autoUpdater.on('update-downloaded', (info) => {
-  dispatch('Update downloaded')
+  mainWindow.webContents.send('update-downloaded');
 })

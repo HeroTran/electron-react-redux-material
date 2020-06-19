@@ -1,7 +1,7 @@
 import path from 'path';
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow , ipcMain} from 'electron';
 const log = require('electron-log');
-const {autoUpdater} = require("electron-updater");
+const { autoUpdater } = require("electron-updater");
 import { PATHS } from './renderer/utils/paths';
 import MenuBuilder from './menu';
 
@@ -10,10 +10,6 @@ autoUpdater.logger.transports.file.level = 'info';
 log.info('App starting...');
 
 let mainWindow = null;
-const dispatch = (data) => {
-  mainWindow.webContents.send('message', data)
-}
-
 const isDev = process.env.NODE_ENV === 'development';
 const isDebugProd = !!process.env.DEBUG_PROD;
 if (!isDev) {
@@ -70,10 +66,12 @@ const createWindow = async () => {
   menuBuilder.buildMenu();
 };
 
+const dispatch = (data) => {
+  mainWindow.webContents.send('message', data)
+}
 /**
  * Add event listeners...
  */
-app.allowRendererProcessReuse = false;
 app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even
   // after all windows have been closed
@@ -84,13 +82,8 @@ app.on('window-all-closed', () => {
 
 
 app.on('ready', () => {
-  
   createWindow();
   autoUpdater.checkForUpdatesAndNotify();
-  mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.webContents.send('version', app.getVersion())
-  })
-
 })
 
 app.on('activate', () => {
@@ -99,6 +92,9 @@ app.on('activate', () => {
   if (mainWindow === null) createWindow();
 });
 
+ipcMain.on('app_version', (event) => {
+  event.sender.send('app_version', { version: app.getVersion() });
+});
 
 
 autoUpdater.on('checking-for-update', () => {
@@ -118,7 +114,7 @@ autoUpdater.on('error', (err) => {
 })
 
 autoUpdater.on('download-progress', (progressObj) => {
-  win.webContents.send('download-progress', progressObj.percent)
+  mainWindow.webContents.send('download-progress', progressObj.percent)
 })
 
 autoUpdater.on('update-downloaded', (info) => {

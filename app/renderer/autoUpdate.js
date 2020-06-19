@@ -12,8 +12,10 @@ ipcRenderer.on('message', (event, text) => {
   container.appendChild(message);
 });
 
-ipcRenderer.on('version', (event, text) => {
-  version.innerText = text;
+ipcRenderer.send('app_version');
+ipcRenderer.on('app_version', (event, arg) => {
+  ipcRenderer.removeAllListeners('app_version');
+  version.innerText = `Version ${arg.version}`;
 });
 
 ipcRenderer.on('download-progress', (event, text) => {

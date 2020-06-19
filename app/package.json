@@ -1,7 +1,7 @@
 {
     "name": "herotran_desktop",
     "productName": "herotran_desktop",
-    "version": "0.0.16",
+    "version": "0.0.17",
     "description": "Build desktop app by Electron React Redux",
     "main": "./main.prod.js",
     "author": {

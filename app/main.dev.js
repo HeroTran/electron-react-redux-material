@@ -57,13 +57,6 @@ const createWindow = async () => {
     mainWindow.once('ready-to-show', () => {
       mainWindow.show();
       mainWindow.focus();
-      try {
-        log.info('Checking update')
-        await autoUpdater.checkForUpdatesAndNotify();
-      } catch (error) {
-        log.info('error checkForUpdatesAndNotify')
-        log.error(error)
-      }
     });
   }
   
@@ -88,7 +81,17 @@ app.on('window-all-closed', () => {
 });
 
 
-app.on('ready', createWindow);
+app.on('ready', async () => {
+  try {
+    log.info('Checking update')
+    await createWindow();
+    await autoUpdater.checkForUpdatesAndNotify();
+  } catch (error) {
+    log.error(error)
+    console.log('ready checkForUpdatesAndNotify');
+    console.log(error);
+  }
+})
 
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the

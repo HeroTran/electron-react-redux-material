@@ -1,17 +1,10 @@
 import path from 'path';
-import { app, BrowserWindow } from 'electron';
-import { autoUpdater } from 'electron-updater';
+const { app, BrowserWindow, ipcMain } = require('electron');
+const { autoUpdater } = require('electron-updater');
+
 import log from 'electron-log';
 import { PATHS } from './renderer/utils/paths';
 import MenuBuilder from './menu';
-
-export default class AppUpdater {
-  constructor() {
-    log.transports.file.level = 'info';
-    autoUpdater.logger = log;
-    autoUpdater.checkForUpdatesAndNotify();
-  }
-}
 
 let mainWindow = null;
 const isDev = process.env.NODE_ENV === 'development';
@@ -59,6 +52,7 @@ const createWindow = async () => {
     mainWindow.once('ready-to-show', () => {
       mainWindow.show();
       mainWindow.focus();
+      autoUpdater.checkForUpdatesAndNotify();
     });
   }
   
@@ -68,7 +62,6 @@ const createWindow = async () => {
 
   const menuBuilder = new MenuBuilder(mainWindow);
   menuBuilder.buildMenu();
-  new AppUpdater();
 };
 
 /**
@@ -89,4 +82,21 @@ app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) createWindow();
+});
+
+
+ipcMain.on('app_version', (event) => {
+  event.sender.send('app_version', { version: app.getVersion() });
+});
+
+autoUpdater.on('update-available', () => {
+  mainWindow.webContents.send('update_available');
+});
+
+autoUpdater.on('update-downloaded', () => {
+  mainWindow.webContents.send('update_downloaded');
+});
+
+ipcMain.on('restart_app', () => {
+  autoUpdater.quitAndInstall();
 });

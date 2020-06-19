@@ -1,7 +1,7 @@
 {
     "name": "electron-react-redux-material",
     "productName": "electron-react-desktop",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Build desktop app by Electron React Redux",
     "private": true,
     "license": "MIT",
@@ -29,7 +29,7 @@
         "clean": "node rimraf",
         "test": "jest  --coverage --coverageDirectory=output/coverage/jest",
         "test:watch": "npm test -- --watch",
-        "deploy-win": "GH_TOKEN=9520551d2e7e330f6658c701f82a87b6336f2855 yarn build && electron-builder build --win --publish always"
+        "deploy-win": "yarn build && electron-builder build --win --x64 --publish always"
     },
     "repository": {
         "type": "git",
@@ -94,13 +94,15 @@
             "buildResources": "resources",
             "output": "release"
         },
-        "publish": [
-            "github"
-          ]
+        "publish": [{
+            "provider": "github",
+            "owner": "HeroTran",
+            "repo": "electron-react-redux-material"
+        }]
     },
     "author": {
         "name": "Hero Tran",
-        "email": "htran@bocasay.com"
+        "email": "herotran210@gmail.com"
     },
     "keywords": [
         "electron",

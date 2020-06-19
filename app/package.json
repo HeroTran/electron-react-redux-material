@@ -1,7 +1,7 @@
 {
     "name": "electron-react-redux-material",
     "productName": "electron-react-desktop",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Build desktop app by Electron React Redux",
     "main": "./main.prod.js",
     "author": {

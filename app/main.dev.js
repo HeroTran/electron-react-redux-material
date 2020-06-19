@@ -1,8 +1,7 @@
 import path from 'path';
 const { app, BrowserWindow, ipcMain } = require('electron');
 const { autoUpdater } = require('electron-updater');
-
-import log from 'electron-log';
+// import log from 'electron-log';
 import { PATHS } from './renderer/utils/paths';
 import MenuBuilder from './menu';
 

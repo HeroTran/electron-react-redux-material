@@ -10,6 +10,8 @@ autoUpdater.logger.transports.file.level = 'info';
 log.info('App starting...');
 
 let mainWindow = null;
+console.log('autoUpdater', autoUpdater);
+
 const isDev = process.env.NODE_ENV === 'development';
 const isDebugProd = !!process.env.DEBUG_PROD;
 if (!isDev) {
@@ -55,6 +57,13 @@ const createWindow = async () => {
     mainWindow.once('ready-to-show', () => {
       mainWindow.show();
       mainWindow.focus();
+      try {
+        log.info('Checking update')
+        await autoUpdater.checkForUpdatesAndNotify();
+      } catch (error) {
+        log.info('error checkForUpdatesAndNotify')
+        log.error(error)
+      }
     });
   }
   
@@ -66,9 +75,7 @@ const createWindow = async () => {
   menuBuilder.buildMenu();
 };
 
-const dispatch = (data) => {
-  mainWindow.webContents.send('message', data)
-}
+
 /**
  * Add event listeners...
  */
@@ -81,10 +88,7 @@ app.on('window-all-closed', () => {
 });
 
 
-app.on('ready', () => {
-  createWindow();
-  autoUpdater.checkForUpdatesAndNotify();
-})
+app.on('ready', createWindow);
 
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
@@ -96,6 +100,10 @@ ipcMain.on('app_version', (event) => {
   event.sender.send('app_version', { version: app.getVersion() });
 });
 
+const dispatch = (data) => {
+  console.log('mainWindow', data);
+  mainWindow.webContents.send('message', data)
+}
 
 autoUpdater.on('checking-for-update', () => {
   dispatch('Checking for update...')
@@ -106,6 +114,8 @@ autoUpdater.on('update-available', (info) => {
 })
 
 autoUpdater.on('update-not-available', (info) => {
+  console.log('update-not-available',info);
+  log.info('Checking update', info)
   dispatch('Update not available.')
 })
 

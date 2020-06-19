@@ -1,8 +1,8 @@
 {
-    "name": "oneonone-desktop",
-    "productName": "oneonone-desktop",
+    "name": "electron-react-redux-material",
+    "productName": "electron-react-desktop",
     "version": "0.0.2",
-    "description": "Build desktop app oneonone by Electron",
+    "description": "Build desktop app by Electron React Redux",
     "private": true,
     "license": "MIT",
     "main": "./app/main.prod.js",
@@ -19,7 +19,7 @@
         "package-ci": "yarn postinstall && yarn build && electron-builder --publish always",
         "package-mac": "yarn build && electron-builder build --mac",
         "package-linux": "yarn build && electron-builder build --linux",
-        "package-win": "yarn build && electron-builder build --win --x64",
+        "package-win": "yarn build && electron-builder build --win --x64 --publish never",
         "postinstall": "node -r @babel/register ./internals/scripts/CheckNativeDep.js && electron-builder install-app-deps && yarn build-dll && opencollective-postinstall",
         "start-main-dev": "cross-env HOT=1 NODE_ENV=development electron -r @babel/register ./app/main.dev.js --progress --profile --colors",
         "start-renderer-dev": "cross-env NODE_ENV=development webpack-dev-server --mode development  --config webpack/config.renderer.dev.babel.js --progress --profile --colors",
@@ -28,11 +28,16 @@
         "lint:fix": "eslint --fix --ext .js,.jsx .",
         "clean": "node rimraf",
         "test": "jest  --coverage --coverageDirectory=output/coverage/jest",
-        "test:watch": "npm test -- --watch"
+        "test:watch": "npm test -- --watch",
+        "deploy-win": "yarn build && electron-builder build --win --publish always"
     },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/HeroTran/electron-react-redux-material"
+      },
     "build": {
-        "productName": "herotran210_desktop_app",
-        "appId": "org.electron.herotran210_desktop_app",
+        "appId": "com.electron.herotran210Desktop",
+        "productName": "herotranDesktop",
         "files": [
             "dist/",
             "node_modules/",
@@ -41,6 +46,21 @@
             "main.prod.js.map",
             "package.json"
         ],
+        "mac": {
+            "type": "distribution",
+            "category": "public.app-category.education",
+            "icon": "resources/icon.png",
+            "target": [
+                "dmg",
+                "zip"
+            ]
+        },
+        "mas": {
+            "type": "distribution",
+            "category": "public.app-category.education",
+            "entitlements": "resources/entitlements.mas.plist",
+            "icon": "resources/icon.png"
+        },
         "dmg": {
             "contents": [
                 {
@@ -73,7 +93,10 @@
         "directories": {
             "buildResources": "resources",
             "output": "release"
-        }
+        },
+        "publish": [
+            "github"
+          ]
     },
     "author": {
         "name": "Hero Tran",

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>herotran210_desktop_app</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="herotran210_desktop_app">
+    <meta name="keywords" content="herotran210_desktop_app">
+    <meta name="author" content="herotran210_desktop_app">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../resources/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../../resources/favicon.ico" />
+    <link rel="shortcut icon"  href="../../resources/favicon.ico" />
+    <script>
+      (() => {
+        if (
+          typeof process !== 'object' ||
+          (typeof process === 'object' && !process.env.START_HOT)
+        ) {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = '../dist/style.css?v' + Math.random();
+          document.getElementsByTagName('head')[0].appendChild(link);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      if (typeof process === 'object') {
+        const scripts = [];
+
+        if (process.env.NODE_ENV === 'development') {
+          // Dynamically insert the DLL script in development env in the
+          // renderer process
+          scripts.push('../dll/renderer.dev.dll.js?v' + Math.random());
+        }
+        if (process.env.START_HOT) {
+          // Dynamically insert the bundled app script in the renderer process
+          const port = process.env.PORT || 3001;
+          scripts.push(`http://localhost:${port}/dist/renderer.dev.js?v` + Math.random());
+        } else {
+          scripts.push('../dist/renderer.prod.js?v' + Math.random());
+        }
+
+        if (scripts.length) {
+          document.write(
+            scripts
+              .map(script => `<script defer src="${script}"><\/script>`)
+              .join('')
+          );
+        }
+      }
+    </script>
+  </body>
+</html>

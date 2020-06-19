@@ -41,34 +41,24 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728,
     icon: path.join(PATHS.root, 'resources/icon.png'),
-    webPreferences:
-      isDev || isDebugProd
-        ? {
-            nodeIntegration: true,
-          }
-        : {
-            preload: path.join(__dirname, 'dist/renderer.prod.js'),
-          },
+    webPreferences: {
+      nodeIntegration: true,
+    },
   });
-  mainWindow.loadURL(`file://${__dirname}/renderer/app.html`);
-  // mainWindow.maximize() full screen;
+
+  isDev
+    ? mainWindow.loadURL(`file://${__dirname}/renderer/appDev.html`)
+    : mainWindow.loadURL(`file://${__dirname}/renderer/app.html`);
+  
+  mainWindow.maximize(); // full screen
   if (isDev || isDebugProd) {
     mainWindow.show();
     mainWindow.focus();
-  }else{
-    mainWindow.webContents.on('did-finish-load', () => {
-      if (!mainWindow) {
-        throw new Error('"mainWindow" is not defined');
-      }
-      if (process.env.START_MINIMIZED) {
-        mainWindow.minimize();
-      } else {
-        mainWindow.show();
-        mainWindow.focus();
-      }
+  } else {
+    mainWindow.once('ready-to-show', () => {
+      mainWindow.show();
+      mainWindow.focus();
     });
   }
   

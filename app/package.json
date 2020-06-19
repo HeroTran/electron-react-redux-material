@@ -1,12 +1,12 @@
 {
-    "name": "herotran210_desktop_app",
-    "productName": "herotran210_desktop_app",
-    "version": "0.0.1",
-    "description": "herotran210_desktop_app",
+    "name": "electron-react-redux-material",
+    "productName": "electron-react-desktop",
+    "version": "0.0.2",
+    "description": "Build desktop app by Electron React Redux",
     "main": "./main.prod.js",
     "author": {
         "name": "Hero Tran",
-        "email": "htran@bocasay.com"
+        "email": "herotran210@gmail.com"
     },
     "scripts": {
       "electron-rebuild": "node -r ../internals/scripts/BabelRegister.js ../internals/scripts/ElectronRebuild.js",

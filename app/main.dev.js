@@ -1,19 +1,21 @@
 import path from 'path';
 import { app, BrowserWindow, ipcMain } from 'electron';
-import { autoUpdater } from 'electron-updater';
-// import log from 'electron-log';
+const log = require('electron-log');
+const {autoUpdater} = require("electron-updater");
 import { PATHS } from './renderer/utils/paths';
 import MenuBuilder from './menu';
 
-export default class AppUpdater {
-  constructor() {
-    log.transports.file.level = 'info';
-    autoUpdater.logger = log;
-    autoUpdater.checkForUpdatesAndNotify();
-  }
-}
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
+log.info('App starting...');
 
 let mainWindow = null;
+
+function sendStatusToWindow(text) {
+  log.info(text);
+  mainWindow.webContents.send('message', text);
+}
+
 const isDev = process.env.NODE_ENV === 'development';
 const isDebugProd = !!process.env.DEBUG_PROD;
 if (!isDev) {
@@ -68,8 +70,29 @@ const createWindow = async () => {
 
   const menuBuilder = new MenuBuilder(mainWindow);
   menuBuilder.buildMenu();
-  new AppUpdater();
 };
+
+autoUpdater.on('checking-for-update', () => {
+  sendStatusToWindow('Checking for update...');
+})
+autoUpdater.on('update-available', (info) => {
+  sendStatusToWindow('Update available.');
+})
+autoUpdater.on('update-not-available', (info) => {
+  sendStatusToWindow('Update not available.');
+})
+autoUpdater.on('error', (err) => {
+  sendStatusToWindow('Error in auto-updater. ' + err);
+})
+autoUpdater.on('download-progress', (progressObj) => {
+  let log_message = "Download speed: " + progressObj.bytesPerSecond;
+  log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
+  log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
+  sendStatusToWindow(log_message);
+})
+autoUpdater.on('update-downloaded', (info) => {
+  sendStatusToWindow('Update downloaded');
+});
 
 /**
  * Add event listeners...
@@ -83,7 +106,10 @@ app.on('window-all-closed', () => {
   }
 });
 
-app.on('ready', createWindow);
+
+app.on('ready', function() {
+  createWindow();
+});
 
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
@@ -92,18 +118,6 @@ app.on('activate', () => {
 });
 
 
-ipcMain.on('app_version', (event) => {
-  event.sender.send('app_version', { version: app.getVersion() });
-});
-
-autoUpdater.on('update-available', () => {
-  mainWindow.webContents.send('update_available');
-});
-
-autoUpdater.on('update-downloaded', () => {
-  mainWindow.webContents.send('update_downloaded');
-});
-
-ipcMain.on('restart_app', () => {
-  autoUpdater.quitAndInstall();
+app.on('ready', function()  {
+  autoUpdater.checkForUpdatesAndNotify();
 });

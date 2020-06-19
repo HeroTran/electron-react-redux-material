@@ -1,7 +1,7 @@
 {
     "name": "electron-react-redux-material",
     "productName": "electron-react-desktop",
-    "version": "0.0.11",
+    "version": "0.0.12",
     "description": "Build desktop app by Electron React Redux",
     "private": true,
     "license": "MIT",

@@ -10,10 +10,8 @@ autoUpdater.logger.transports.file.level = 'info';
 log.info('App starting...');
 
 let mainWindow = null;
-
-function sendStatusToWindow(text) {
-  log.info(text);
-  mainWindow.webContents.send('message', text);
+const dispatch = (data) => {
+  mainWindow.webContents.send('message', data)
 }
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -72,28 +70,6 @@ const createWindow = async () => {
   menuBuilder.buildMenu();
 };
 
-autoUpdater.on('checking-for-update', () => {
-  sendStatusToWindow('Checking for update...');
-})
-autoUpdater.on('update-available', (info) => {
-  sendStatusToWindow('Update available.');
-})
-autoUpdater.on('update-not-available', (info) => {
-  sendStatusToWindow('Update not available.');
-})
-autoUpdater.on('error', (err) => {
-  sendStatusToWindow('Error in auto-updater. ' + err);
-})
-autoUpdater.on('download-progress', (progressObj) => {
-  let log_message = "Download speed: " + progressObj.bytesPerSecond;
-  log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
-  log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
-  sendStatusToWindow(log_message);
-})
-autoUpdater.on('update-downloaded', (info) => {
-  sendStatusToWindow('Update downloaded');
-});
-
 /**
  * Add event listeners...
  */
@@ -107,9 +83,15 @@ app.on('window-all-closed', () => {
 });
 
 
-app.on('ready', function() {
+app.on('ready', () => {
+  
   createWindow();
-});
+  autoUpdater.checkForUpdatesAndNotify();
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.webContents.send('version', app.getVersion())
+  })
+
+})
 
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
@@ -118,6 +100,27 @@ app.on('activate', () => {
 });
 
 
-app.on('ready', function()  {
-  autoUpdater.checkForUpdatesAndNotify();
-});
+
+autoUpdater.on('checking-for-update', () => {
+  dispatch('Checking for update...')
+})
+
+autoUpdater.on('update-available', (info) => {
+  dispatch('Update available.')
+})
+
+autoUpdater.on('update-not-available', (info) => {
+  dispatch('Update not available.')
+})
+
+autoUpdater.on('error', (err) => {
+  dispatch('Error in auto-updater. ' + err)
+})
+
+autoUpdater.on('download-progress', (progressObj) => {
+  win.webContents.send('download-progress', progressObj.percent)
+})
+
+autoUpdater.on('update-downloaded', (info) => {
+  dispatch('Update downloaded')
+})

@@ -7,43 +7,32 @@
     <meta name="keywords" content="herotran210_desktop_app">
     <meta name="author" content="herotran210_desktop_app">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="icon" type="image/png" sizes="32x32" href="../../resources/favicon.ico" />
     <link rel="icon" type="image/png" sizes="16x16" href="../../resources/favicon.ico" />
     <link rel="shortcut icon"  href="../../resources/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="../dist/style.css">
-    <style>
-      #notification {
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        width: 200px;
-        padding: 20px;
-        border-radius: 5px;
-        background-color: white;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      }
-      .hidden {
-        display: none;
-      }
-    </style>
   </head>
   <body>
-    Current version: <span id="version">vX.Y.Z</span>
-    <div id="messages"></div>
+    <div class="w3-container">
+
+      <h1 style="color:blueviolet">Pingo App - New</h1>
+      <h3>Brand new app</h3>
+  
+      <p>
+        Current version: <span id="version"></span>
+      </p>
+  
+      <div id="messages" style="color:cyan"></div>
+  
+      <div class="w3-light-grey">
+        <div class="w3-blue" style="height:24px;width:0%" id="progressBar"></div>
+      </div>
+  
+    </div>
     <script>
-        // Display the current version
-        let version = window.location.hash.substring(1);
-        document.getElementById('version').innerText = version;
-        
-        // Listen for messages
-        const {ipcRenderer} = require('electron');
-        ipcRenderer.on('message', function(event, text) {
-          var container = document.getElementById('messages');
-          var message = document.createElement('div');
-          message.innerHTML = text;
-          container.appendChild(message);
-        })
-      </script>
+      require('./autoUpdate')
+    </script>
     <div id="root"></div>
     <script src="../dist/renderer.prod.js"></script>
 	</body>

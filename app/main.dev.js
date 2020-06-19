@@ -103,6 +103,11 @@ ipcMain.on('app_version', (event) => {
   event.sender.send('app_version', { version: app.getVersion() });
 });
 
+
+ipcMain.on('restart_app', () => {
+  autoUpdater.quitAndInstall();
+});
+
 const dispatch = (data) => {
   console.log('mainWindow', data);
   mainWindow.webContents.send('message', data)

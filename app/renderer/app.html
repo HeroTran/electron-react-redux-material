@@ -16,16 +16,9 @@
   <body>
     <div id="notification" class="hidden">
       <div class="content-noti">
-        <h1>This app has <span id="version"></span></h1>
-        <i class="icon"></i>
-        <p id="message"></p>
-        <div class="main-progress"><div style="width:0%" id="progressBar"></div></div>
-        <button id="close-button" class="button-noti hidden">
-          Close
-        </button>
-        <button id="restart-button" class="button-noti hidden">
-          Restart
-        </button>
+        <div class="noti-header"><span id="version"></span><i id="close-button"></i></div>
+        <div class="noti-body"><p id="message"></p><div class="main-progress"><div style="width:0%" id="progressBar"></div></div></div>
+        <div class="noti-footer"><button id="restart-button" class="btn btn-primary hidden">Restart</button></div>
       </div>
     </div>
     <script src="../autoUpdate/autoUpdate.js"></script>

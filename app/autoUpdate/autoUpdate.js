@@ -23,24 +23,24 @@ ipcRenderer.on('update-available', () => {
   ipcRenderer.removeAllListeners('update-available');
   message.innerText = 'A new update is available. Downloading now...';
   notification.classList.remove('hidden');
+  restartButton.disabled = true;
 });
 
 ipcRenderer.on('update-downloaded', () => {
   ipcRenderer.removeAllListeners('update-downloaded');
   message.innerText =
     'Update Downloaded. It will be installed on restart. Restart now?';
+  restartButton.disabled = false;
   restartButton.classList.remove('hidden');
   notification.classList.remove('hidden');
 });
 
 document.getElementById('close-button').addEventListener('click', function () {
-  console.warn('close');
   notification.classList.add('hidden');
 });
 
 document
   .getElementById('restart-button')
   .addEventListener('click', function () {
-    console.warn('restart');
     ipcRenderer.send('restart_app');
   });

@@ -1,7 +1,7 @@
 {
     "name": "herotran_desktop",
     "productName": "herotran_desktop",
-    "version": "0.0.23",
+    "version": "0.0.24",
     "description": "Build desktop app by Electron React Redux",
     "private": true,
     "license": "MIT",
@@ -40,9 +40,9 @@
         "productName": "herotranDesktop",
         "files": [
             "dist/",
+            "autoUpdate/",
             "node_modules/",
             "renderer/app.html",
-            "renderer/autoUpdate.js",
             "main.prod.js",
             "main.prod.js.map",
             "package.json"
